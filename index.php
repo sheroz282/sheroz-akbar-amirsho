@@ -6,12 +6,12 @@
 	4) Cinnamon or cocoa to taste
 */
 
-function milkHoney(int $milk, int $honey, int $lemonJuice, int $cinnamonCocoa)
+function milk_honey(int $milk, int $honey, int $lemon_juice, int $cinnamon_and_cocoa)
 {
 	echo
 	"$milk Beat milk with honey and lemon juice in a blender or mixer until a slight foam is formed. " .
 	"$honey 4 tsp" .
-	"$lemonJuice 1tsp" .
-	"$cinnamonCocoa Pour the cocktail into glasses. Garnish with cinnamon or cocoa if desired.";
+	"$lemon_juice 1tsp" .
+	"$cinnamon_and_cocoa Pour the cocktail into glasses. Garnish with cinnamon or cocoa if desired.";
 }
-milkHoney(1, 4, 1, 1);
+milk_honey(1, 4, 1, 1);
