@@ -1,4 +1,3 @@
-
 <?php
 /*
 Задача5 (Заказ у рыбака):
@@ -11,42 +10,69 @@ INPUT: Имя рыбы, количество рыбы
 находится для в наборе уже существующих рыб в океане (создаете отдельный массив доступных рыб)
 */
 
-$fish_name = [
-    "carp",
-    "zander"
-];
+//Проверка типы данных
 
-function fishNameOrder(array $fish_name): string
+use JetBrains\PhpStorm\Pure;
+
+function validateString($fish_name): string
 {
-    if(is_array($fish_name) === is_string($fish_name))
-    {
-        return "Very few characters in the order. ";
+    if(is_string($fish_name)) {
+        return   "200: Fish name type is ok! ";
     }
-    return "The value of characters are ok. ";
-
+    return   "422: The type of Fish name is incorrectly! ";
 }
-echo fishNameOrder($fish_name) . "<br/>";
 
-$quantity_of_fish = 2;
-$min_value = 1;
-function fishQuantityOrderMin(int $quantity_of_fish, int $min_value): string
+function validateInteger($quantity_of_fish): string
 {
-    if(mb_strlen($quantity_of_fish) <= $min_value)
-    {
-        return "Very few characters in the order. ";
-    }
-	return "Min number of characters are ok. ";
-}
-echo fishQuantityOrderMin(2, 1) . "<br>";
+      if(is_int($quantity_of_fish)){
+        return   "200: Fish number type is ok! ";
+      }
+      return "422: The type of Fish number is incorrectly! ";
+  }
 
-
-$max_value = 2;
-function fishQuantityOrderMax(int $quantity_of_fish, int $max_value): string
+// Длина команды минимум и максимум
+function validateMin ($fish_name, $min_value ): string
 {
-    if(mb_strlen($quantity_of_fish) > $max_value)
-    {
-        return "Too many characters in the order. ";
+    if(mb_strlen($fish_name) <= $min_value) {
+        return "Very few characters in the order! ";
     }
-	return "Max number of characters are ok. ";
+    return "Min number of characters are ok! ";
 }
-echo fishQuantityOrderMax(2, 2);
+
+function validateMax($fish_name, $max_value): string
+{
+    if  (strlen($fish_name) >= $max_value) {
+        return "A lot of characters in the order! " ;
+    }
+    return "Max number of characters are ok! " ;
+}
+
+// находится уже существующих рыб в океане
+function validateInArray($fish_name): string
+{
+    $fishes = [
+        'Сазан',
+        'Судак'
+    ];
+
+    if(in_array($fish_name, $fishes)){
+        return "The fish is in list!" ;
+    }
+    return "The fish is not in list!" ;
+}
+
+$min_value  =  1 ;
+$max_value  =  2 ;
+$quantity_of_fish = readline ("Input the number of fish, please: ");
+$fish_name = readline("Input the name of fish, please: ");
+
+#[Pure] function orderToFisherman($fish_name, $quantity_of_fish, $min_value, $max_value): string
+{
+    $validate_string  = validateString($fish_name);
+    $validate_integer = validateInteger($quantity_of_fish);
+    $validate_min     = validateMin($fish_name, $min_value);
+    $validate_max     = validateMax($fish_name, $max_value);
+    $in_array         = validateInArray($fish_name);
+    return $validate_string . $validate_integer . $validate_min . $validate_max . $in_array;
+}
+echo orderToFisherman($fish_name, $quantity_of_fish, $min_value, $max_value);
