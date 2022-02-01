@@ -7,15 +7,17 @@ function typeOfVariables(
 )
 {
     if (is_int($transfer_amount)); {
-    return "type of transfer_amount is "     .gettype($transfer_amount)."<br>";
+        return "type of transfer_amount is "     .gettype($transfer_amount)."<br>";
 }
     return "Incorrect value"."<br>";
+    
     if (is_int($sender_number)); {
-    return "type of sender is "              .gettype($sender_number)."<br>";
+        return "type of sender is "              .gettype($sender_number)."<br>";
 }
     return "Incorrect value"."<br>";
+    
     if (is_int($sender_number)); {
-    return "type of recipient is "           .gettype($recipient_number)."<br>";
+        return "type of recipient is "           .gettype($recipient_number)."<br>";
 }
     return "Incorrect value"."<br>";
 }
