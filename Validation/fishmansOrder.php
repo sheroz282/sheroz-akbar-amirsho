@@ -47,15 +47,15 @@ function validateMax($fish_name, $max_value): string
     return "Max number of characters are ok! " ;
 }
 
+$fish_name = [
+    'Сазан',
+    'Судак'
+];
+
 // находится уже существующих рыб в океане
 function validateInArray($fish_name): string
 {
-    $fishes = [
-        'Сазан',
-        'Судак'
-    ];
-
-    if(in_array($fish_name, $fishes)){
+    if(in_array($fish_name)){
         return "The fish is in list!" ;
     }
     return "The fish is not in list!" ;
