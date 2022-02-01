@@ -1,57 +1,60 @@
 <?php
 
-function type_of_variables(
-    int $transfer_amount,
-    int $sender_number,
-    int $recipient_number
+function typeOfVariables(
+    $transfer_amount,
+    $sender_number,
+    $recipient_number
 )
 {
-    echo "type of transfer_amount is "     .gettype($transfer_amount)."<br>";
-    echo "type of sender is "              .gettype($sender_number)."<br>";
-    echo "type of recipient is "           .gettype($recipient_number)."<br>";
+    if (is_int($transfer_amount)); {
+    return "type of transfer_amount is "     .gettype($transfer_amount)."<br>";
+}
+    return "Incorrect value"."<br>";
+    if (is_int($sender_number)); {
+    return "type of sender is "              .gettype($sender_number)."<br>";
+}
+    return "Incorrect value"."<br>";
+    if (is_int($sender_number)); {
+    return "type of recipient is "           .gettype($recipient_number)."<br>";
+}
+    return "Incorrect value"."<br>";
+}
+function minSumOfTransfer(
+    $transfer_amount,
+    $min_sum
+)
+{
+    if ($transfer_amount < $min_sum) {
+        return "It is very little!!!"."<br>";
+    }
+    return "OK!"."<br>";
 }
 
-function min_sum_of_transfer(
-    int $transfer_amount,
-    int $min_sum
+function maxSumOfTransfer(
+    $transfer_amount,
+    $max_sum
 )
 {
-    if ($transfer_amount < $min_sum)
-    {
-        echo "It is very little!!!"."<br>";
+    if ($transfer_amount > $max_sum) {
+        return "It is very lot!!!"."<br>";
     }
-    echo "OK!"."<br>";
+    return "OK!"."<br>";
 }
-
-function max_sum_of_transfer(
-    int $transfer_amount,
-    int $max_sum
+function numberValidatyCheck(
+    $sender_number,
+    $recipient_number,
+    $correct_number
 )
 {
-    if ($transfer_amount > $max_sum) 
-    {
-        echo "It is very lot!!!"."<br>";
+    if (mb_strlen($sender_number) <> $correct_number) {
+        return "Incorrect adress of sender!!!"."<br>";
     }
-    echo "OK!"."<br>";
+    if (mb_strlen($recipient_number) <> $correct_number) {
+        return "Incorrect adress of recipient!!!"."<br>";
+    }
+    return "Done!";
 }
-function number_check(
-    int $sender_number,
-    int $recipient_number,
-    int $correct_number
-)
-{
-    if (strlen($sender_number) <> $correct_number)
-    {
-        echo "Incorrect adress of sender!!!"."<br>";
-    }
-    if (strlen($recipient_number) <> $correct_number)
-    {
-        echo "Incorrect adress of recipient!!!"."<br>";
-    }
-    echo "Done!";
-}
-
-type_of_variables(25000, 944445222, 933007337);
-min_sum_of_transfer(25000, 10000);
-max_sum_of_transfer(25000, 100000);
-number_check(944445222, 933007337, 9);
+typeOfVariables(25000, 944445222, 933007337);
+minSumOfTransfer(25000, 10000);
+maxSumOfTransfer(25000, 100000);
+numberValidatyCheck(944445222, 933007337, 9);
