@@ -10,9 +10,7 @@ INPUT: Имя рыбы, количество рыбы
 находится для в наборе уже существующих рыб в океане (создаете отдельный массив доступных рыб)
 */
 
-use JetBrains\PhpStorm\Pure;
-
-function validateString($order_fish): string
+function validateExistingFish(string $accept_order): string
 {
     $fish_name = [
         "Сазан",
@@ -20,33 +18,37 @@ function validateString($order_fish): string
         "Змеглаво"
     ];
     foreach ($fish_name as $fishes) {
-        if ($fishes == $order_fish)
+        if (is_string($fishes) == $accept_order)
             return   "200: Fish name type is ok! ";
     }
     return   "422: The type of Fish name is incorrectly! ";
 }
 
-function validateMin(int $min_value): string
+function validateMin($value, $min_value): string
 {
-    if($min_value >= 1){
+    if(is_int($value) >= is_int($min_value)){
         return "Min number of characters are ok! ";
     }
     return "Very few characters in the order! ";
 }
 
-function validateMax(int $max_value): string
+function validateMax($value, $max_value): string
 {
-    if($max_value <= 3){
+    if(is_int($value) <= is_int($max_value)){
         return "Max number of characters are ok! ";
     }
     return "A lot of characters in the order! ";
 }
 
-#[Pure] function orderToFisherman($order_fish, $min_value, $max_value): string
+$value  =  readline("Input the name of fish, please: ");
+$min_value  =  readline("Enter number of fish, minimum 1 please: ");
+$max_value = readline ("Enter number of fish, maximum 3 please: ");
+$accept_order = readline("Input the name of fish, please: ");
+function orderToFisherman($accept_order, $value, $min_value, $max_value): string
 {
-    $validate_string  = validateString($order_fish);
-    $validate_min     = validateMin($min_value);
-    $validate_max     = validateMax($max_value);
+    $validate_string  = validateExistingFish($accept_order)   . "<br>";
+    $validate_min     = validateMin($value, $min_value) . "<br>";
+    $validate_max     = validateMax($value, $max_value) . "<br>";
     return $validate_string . $validate_min . $validate_max ;
 }
-echo orderToFisherman('Сазан', 1, 4);
+print orderToFisherman("$accept_order", "$value", "$min_value", "$max_value");
