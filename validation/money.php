@@ -1,62 +1,41 @@
 <?php
-
-function typeOfVariables(
-    $transfer_amount,
-    $sender_number,
-    $recipient_number
-)
+function validateInt($money_in_cents)
 {
-    if (is_int($transfer_amount)); {
-        return "type of transfer_amount is "     .gettype($transfer_amount)."<br>";
-}
-    return "Incorrect value"."<br>";
-    
-    if (is_int($sender_number)); {
-        return "type of sender is "              .gettype($sender_number)."<br>";
-}
-    return "Incorrect value"."<br>";
-    
-    if (is_int($sender_number)); {
-        return "type of recipient is "           .gettype($recipient_number)."<br>";
-}
-    return "Incorrect value"."<br>";
-}
-function minSumOfTransfer(
-    $transfer_amount,
-    $min_sum
-)
-{
-    if ($transfer_amount < $min_sum) {
-        return "It is very little!!!"."<br>";
+    if (is_int($money_in_cents))
+    {
+        return "Error! Incorrect data";
     }
-    return "OK!"."<br>";
+
+    return "OK! 200. ";
 }
 
-function maxSumOfTransfer(
-    $transfer_amount,
-    $max_sum
-)
+function validateMin($money_in_cents, $min_value)
 {
-    if ($transfer_amount > $max_sum) {
-        return "It is very lot!!!"."<br>";
+    if ($money_in_cents <= $min_value)
+    {
+        return "ERROR! This amount of money is not enough";
     }
-    return "OK!"."<br>";
+    return "OK! This amount of money in the range";
 }
-function numberValidatyCheck(
-    $sender_number,
-    $recipient_number,
-    $correct_number
-)
+
+function validateMax($money_in_cents, $max_value)
 {
-    if (mb_strlen($sender_number) <> $correct_number) {
-        return "Incorrect adress of sender!!!"."<br>";
+    if ($money_in_cents >= $max_value) {
+        return "ERROR! This amount of money is a lot";
     }
-    if (mb_strlen($recipient_number) <> $correct_number) {
-        return "Incorrect adress of recipient!!!"."<br>";
-    }
-    return "Done!";
+    return "OK! This amount of money in the range";
 }
-typeOfVariables(25000, 944445222, 933007337);
-minSumOfTransfer(25000, 10000);
-maxSumOfTransfer(25000, 100000);
-numberValidatyCheck(944445222, 933007337, 9);
+
+function validateTransfer($money_in_cents, $sender_account_number, $recipient_account_number)
+{
+    $validate_message = "";
+    $validate_message .= validateInt($money_in_cents);
+    $validate_message .= validateMin($money_in_cents, 10000);
+    $validate_message .= validateMax($money_in_cents, 100000);
+    return "$validate_message";
+}
+
+$money_in_cents = 15000;
+$sender_account_number = 944445222;
+$recipient_account_number = 933007337;
+validateTransfer($money_in_cents, $sender_account_number, $recipient_account_number);
