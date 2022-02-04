@@ -17,11 +17,19 @@ function validateExistingFish(string $accept_order): string
         "Судак",
         "Змеглаво"
     ];
+<<<<<<< HEAD
 
     if ($fish_name == is_string($accept_order)){
         return   "200: Fish name type is ok! ";
     }
+=======
+    foreach ($fish_name as $fishes) {
+        if (in_array($fishes) == $accept_order)
+            return   "200: Fish name type is ok! ";
+    }else{
+>>>>>>> 1359df0d2ab0f8a50fd5e28707a9dce220b49ea1
     return   "422: The type of Fish name is incorrectly! ";
+    }
 }
 
 function validateMin($value, $min_value): string
@@ -38,11 +46,19 @@ function validateMax($value, $max_value): string
     if(is_int($value) <= $max_value){
         return "Max number of characters are ok! ";
     }else{
+<<<<<<< HEAD
         return "A lot of characters in the order! ";
     }
 }
 
 $max_value = readline ("Enter number of fish, please: ");
+=======
+    return "A lot of characters in the order! ";
+    }
+}
+
+$min_value  =  readline("Enter number of fish, please: ");
+>>>>>>> 1359df0d2ab0f8a50fd5e28707a9dce220b49ea1
 $accept_order = readline("Input the name of fish, please: ");
 #[Pure] function orderToFisherman($accept_order, $value, $min_value, $max_value): string
 {
@@ -51,7 +67,11 @@ $accept_order = readline("Input the name of fish, please: ");
     $validate_max     = validateMax($value, $max_value) . "<br>";
     return $validate_string . $validate_min . $validate_max ;
 }
+<<<<<<< HEAD
 echo orderToFisherman("Сазан", "1", "2", "3");
 
 
 
+=======
+print orderToFisherman("$accept_order", "$value", "$min_value", "$max_value");
+>>>>>>> 1359df0d2ab0f8a50fd5e28707a9dce220b49ea1
