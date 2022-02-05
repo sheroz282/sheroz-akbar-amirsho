@@ -1,16 +1,16 @@
 <?php
 
-function validateMax($value, $max_value = 50)
+function validateMax($value, $max_value = 5)
 {
-    if ($value >= $max_value) {
+    if (strlen($value) >= $max_value) {
         return "ERROR 422! You inserted wrong coordinates - over maximum!";
     }
     return "Success! Max is not exceeded.";
 }
 
-function validateMin($value, $min_value = 20)
+function validateMin($value, $min_value = 3)
 {
-    if ($value <= $min_value) {
+    if (strlen($value) <= $min_value) {
         return "ERROR 422! You inserted wrong coordinates - under minimum!";
     }
     return "Success! Min is not surpassed.";
