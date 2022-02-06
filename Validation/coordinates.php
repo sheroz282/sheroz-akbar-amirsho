@@ -39,8 +39,8 @@ function ruleParser($rules, $any_value)
     $rules_in_array = explode('|', $rules);
     foreach ($rules_in_array as $rule) {
         $rule_with_key_param = explode(':', $rule);
+        // [[0] => float [1] => min:3 [2] => max:5 [3] => scope:0:90];
         $parameters = array_slice($rule_with_key_param, 1);
-        // ['float', 'min', '3', 'max', '5', 'scope', '0', '90'];
         if (count($rule_with_key_param) == 1) {
             array_push
             ($message,
@@ -50,7 +50,7 @@ function ruleParser($rules, $any_value)
             array_push
             (
                 $message,
-                call_user_func_array("validate" . ucfirst($rule_with_key_param[0]),[$any_value, ...$parameters])
+                call_user_func_array("validate" . ucfirst($rule_with_key_param[0]), [$any_value, ...$parameters])
             );
         }
     }
