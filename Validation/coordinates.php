@@ -16,7 +16,7 @@ function validateMin($value, $min_value = 3)
     return "Success! Min is not surpassed.";
 }
 
-function validateType($value)
+function validateFloat($value)
 {
     if (!filter_var($value, FILTER_VALIDATE_FLOAT)) {
         return "ERROR: Type is not float!";
@@ -26,30 +26,49 @@ function validateType($value)
 
 function validateScope($value, $point_a, $point_b)
 {
-    if ($value <= $point_a && $value >= $point_b){
+    if ($value <= $point_a && $value >= $point_b) {
         return "ERROR! You are out of scope!";
     }
 
     return "Got your spot! We will pick you up!";
 }
 
-
-function validateCoordinates($latitude, $longitude)
+function ruleParser($rules, $any_value)
 {
-    $validation_message = "";
-    $validation_message .= validateType($latitude) . " - latitude\n";
-    $validation_message .= validateType($longitude) . " - longitude\n";
-    $validation_message .= validateMin($latitude) . " - latitude\n"; // you can insert 2nd param if needed
-    $validation_message .= validateMax($latitude) . " - latitude\n"; // you can insert 2nd param if needed
-    $validation_message .= validateMin($longitude) . " - longitude\n"; // you can insert 2nd param if needed
-    $validation_message .= validateMax($longitude) . " - longitude\n"; // you can insert 2nd param if needed
-    $validation_message .= validateScope($longitude, 0, 90) . " - longitude\n";
-    $validation_message .= validateScope($latitude, 0, 180) . " - latitude\n";
-    return $validation_message;
+    $message = [];
+    $rules_in_array = explode('|', $rules);
+    foreach ($rules_in_array as $rule) {
+        $rule_with_key_param = explode(':', $rule);
+        $parameters = array_slice($rule_with_key_param, 1);
+        // ['float', 'min', '3', 'max', '5', 'scope', '0', '90'];
+        if (count($rule_with_key_param) == 1) {
+            array_push
+            ($message,
+                call_user_func_array("validate" . ucfirst($rule_with_key_param[0]), [$any_value])
+            );
+        } else {
+            array_push
+            (
+                $message,
+                call_user_func_array("validate" . ucfirst($rule_with_key_param[0]),[$any_value, ...$parameters])
+            );
+        }
+    }
+    return $message;
+}
+
+function index($request)
+{
+    $rule = "float|min:3|max:5|scope:0:90";
+    $messages = ruleParser($rule, $request);
+
+    return count($messages)
+        ? implode(",\n", $messages)
+        : "No validation messages";
 }
 
 $my_latitude = readline("Введите координаты широты:");
 $my_longitude = readline("Введите координаты долготы:");
 
-$result = validateCoordinates($my_latitude, $my_longitude);
-print($result);
+echo index($my_latitude);
+echo index($my_longitude);
